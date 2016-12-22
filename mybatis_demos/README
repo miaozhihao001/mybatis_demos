@@ -1,0 +1,4 @@
+将mybatis源码下载并用eclipse进行编译的时候报错
+http://mvnrepository.com/artifact/org.thymeleaf/thymeleaf/2.0.16
+将一些包mybatis源代码中加进来，下面如果还出现问题的话就是用mybatis3.30，看github上说好像是解决了ongl的问题。
+
