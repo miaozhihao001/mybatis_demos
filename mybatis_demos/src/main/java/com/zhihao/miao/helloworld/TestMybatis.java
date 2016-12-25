@@ -2,6 +2,7 @@ package com.zhihao.miao.helloworld;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -54,7 +55,85 @@ public class TestMybatis {
 		for(User user:list){
 			System.out.println(user);
 		}
-		
+		// 释放资源
+		sqlSession.close();
 	}
+	
+	@Test
+	public void insertUser() throws Exception{
+		SqlSession sqlSession = getSession();
+		User user = new User();
+		user.setUsername("miaozhihao");
+		user.setBirthday(new Date());
+		user.setSex("1");
+		user.setAddress("江苏苏州");
+		sqlSession.insert("test.insertUser", user);
+		System.out.println(user.getId());
+		//提交事务
+		sqlSession.commit();
+		// 释放资源
+		sqlSession.close();
+	}
+	
+	@Test
+	public void deleteUser() throws Exception{
+		SqlSession sqlSession = getSession();
+		sqlSession.delete("test.deleteUser",28);
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	@Test
+	public void updateUserById() throws Exception{
+		// 通过工厂得到SqlSession
+		SqlSession sqlSession = getSession();
+		// 更新用户信息
+		User user = new User();
+		// 必须设置id
+		user.setId(26);
+		user.setBirthday(new Date());
+		user.setSex("2");
+		user.setAddress("河南郑州");
+
+		sqlSession.update("test.updateUserById", user);
+
+		// 提交事务
+		sqlSession.commit();
+
+		// 关闭会话
+		sqlSession.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
